@@ -10,13 +10,13 @@ final class AsyncFetcher {
         serialAccessQueue.maxConcurrentOperationCount = 1
     }
 
-    func fetchAsync(_ identifier: UUID, completion: ((DisplayData?) -> Void)? = nil) {
+    func fetchAsync(_ identifier: UUID, message: String, completion: ((DisplayData?) -> Void)? = nil) {
         serialAccessQueue.addOperation {
             if let completion = completion {
                 let handlers = self.completionHandlers[identifier, default: []]
                 self.completionHandlers[identifier] = handlers + [completion]
             }
-            self.fetchData(for: identifier)
+            self.fetchData(for: identifier, message: message)
         }
     }
 
@@ -35,14 +35,14 @@ final class AsyncFetcher {
         }
     }
 
-    private func fetchData(for identifier: UUID) {
+    private func fetchData(for identifier: UUID, message: String) {
         guard operation(for: identifier) == nil else { return }
         
         if let data = fetchedData(for: identifier) {
             invokeCompletionHandlers(for: identifier, with: data)
             
         } else {
-            let operation = AsyncFetcherOperation(identifier: identifier)
+            let operation = AsyncFetcherOperation(identifier: identifier, message: message)
             operation.completionBlock = { [weak operation] in
                 guard let fetchedData = operation?.fetchedData else { return }
                 self.cache.setObject(fetchedData, forKey: identifier as NSUUID)

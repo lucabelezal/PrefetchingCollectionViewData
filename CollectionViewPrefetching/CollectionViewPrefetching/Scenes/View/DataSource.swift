@@ -1,42 +1,23 @@
 import UIKit
 
-final class DataSource: NSObject {
-    private let asyncFetcher = AsyncFetcher()
+protocol DataSourceDelegate: AnyObject {
+    func fetchData(for identifier: UUID, message: String, with cell: Cell)
+    func checkIfHasAlreadyFetchedData(for identifier: UUID, message: String) -> DisplayData?
+    func fetchAsync(for indexPaths: [IndexPath])
+    func cancelFetch(for indexPaths: [IndexPath])
+}
+
+final class DataSource: NSObject {    
+    weak var delegate: DataSourceDelegate?
+    
     private let models: [Model]
     
     init(models: [Model]) {
         self.models = models
     }
-        
-    private func fetchData(for identifier: UUID, with cell: Cell) {
-        asyncFetcher.fetchAsync(identifier) { fetchedData in
-            DispatchQueue.main.async {
-                guard cell.representedIdentifier == identifier else { return }
-                cell.configure(with: fetchedData)
-            }
-        }
-    }
-    
-    private func checkIfHasAlreadyFetchedData(for identifier: UUID) -> DisplayData? {
-        asyncFetcher.fetchedData(for: identifier)
-    }
     
     private func clearCell(cell: Cell) {
         cell.configure(with: nil)
-    }
-    
-    private func fetchAsync(for indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            let model = models[indexPath.row]
-            asyncFetcher.fetchAsync(model.identifier)
-        }
-    }
-    
-    private func cancelFetch(for indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            let model = models[indexPath.row]
-            asyncFetcher.cancelFetch(model.identifier)
-        }
     }
 }
 
@@ -54,11 +35,11 @@ extension DataSource: UICollectionViewDataSource {
         let identifier = model.identifier
         cell.representedIdentifier = identifier
         
-        if let fetchedData = checkIfHasAlreadyFetchedData(for: identifier) {
+        if let fetchedData = delegate?.checkIfHasAlreadyFetchedData(for: identifier, message: model.message) {
             cell.configure(with: fetchedData)
         } else {
             clearCell(cell: cell)
-            fetchData(for: identifier, with: cell)
+            delegate?.fetchData(for: identifier, message: model.message, with: cell)
         }
         
         return cell
@@ -67,10 +48,10 @@ extension DataSource: UICollectionViewDataSource {
 
 extension DataSource: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        fetchAsync(for: indexPaths)
+        delegate?.fetchAsync(for: indexPaths)
     }
     
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
-        cancelFetch(for: indexPaths)
+        delegate?.cancelFetch(for: indexPaths)
     }
 }

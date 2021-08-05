@@ -27,7 +27,7 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.fetchModels()
+        presenter.fetchData()
     }
     
     @available(*, unavailable)
@@ -74,7 +74,26 @@ final class ViewController: UIViewController {
 extension ViewController: ViewControllerProtocol {
     func show(models: [Model]) {
         dataSource = DataSource(models: models)
+        dataSource?.delegate = self
         collectionView.dataSource = dataSource
         collectionView.prefetchDataSource = dataSource
+    }
+}
+
+extension ViewController: DataSourceDelegate {
+    func fetchData(for identifier: UUID, message: String, with cell: Cell) {
+        presenter.fetchData(for: identifier, message: message, with: cell)
+    }
+    
+    func checkIfHasAlreadyFetchedData(for identifier: UUID, message: String) -> DisplayData? {
+        presenter.checkIfHasAlreadyFetchedData(for: identifier)
+    }
+    
+    func fetchAsync(for indexPaths: [IndexPath]) {
+        presenter.fetchAsync(for: indexPaths)
+    }
+    
+    func cancelFetch(for indexPaths: [IndexPath]) {
+        presenter.cancelFetch(for: indexPaths)
     }
 }
