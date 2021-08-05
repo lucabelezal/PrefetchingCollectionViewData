@@ -2,20 +2,12 @@ import UIKit
 
 final class DataSource: NSObject {
     private let asyncFetcher = AsyncFetcher()
-    private let collectionView: UICollectionView
     private let models: [Model]
     
-    init(collectionView: UICollectionView, models: [Model]) {
-        self.collectionView = collectionView
+    init(models: [Model]) {
         self.models = models
-        super.init()
-        registerCell()
     }
-    
-    private func registerCell() {
-        collectionView.register(Cell.self, forCellWithReuseIdentifier: "Cell")
-    }
-    
+        
     private func fetchData(for identifier: UUID, with cell: Cell) {
         asyncFetcher.fetchAsync(identifier) { fetchedData in
             DispatchQueue.main.async {

@@ -7,6 +7,7 @@ protocol ViewControllerProtocol: AnyObject {
 final class ViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
+        collectionView.register(Cell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.layer.borderColor = UIColor.black.cgColor
         collectionView.layer.borderWidth = 2
         collectionView.clipsToBounds = false
@@ -72,7 +73,7 @@ final class ViewController: UIViewController {
 
 extension ViewController: ViewControllerProtocol {
     func show(models: [Model]) {
-        dataSource = DataSource(collectionView: collectionView, models: models)
+        dataSource = DataSource(models: models)
         collectionView.dataSource = dataSource
         collectionView.prefetchDataSource = dataSource
     }
