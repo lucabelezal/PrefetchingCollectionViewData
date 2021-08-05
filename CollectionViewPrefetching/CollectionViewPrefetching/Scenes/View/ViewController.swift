@@ -1,7 +1,7 @@
 import UIKit
 
 protocol ViewControllerProtocol: AnyObject {
-    
+    func show(models: [Model])
 }
 
 final class ViewController: UIViewController {
@@ -20,24 +20,20 @@ final class ViewController: UIViewController {
     init(presenter: PresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
+        self.presenter.view = self
         setupView()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        presenter.fetchModels()
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
-        view.backgroundColor = .lightGray
-        
-        dataSource = DataSource(collectionView: collectionView, models: presenter.fetchModels())
-        collectionView.dataSource = dataSource
-        collectionView.prefetchDataSource = dataSource
-    }
-    
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -56,6 +52,7 @@ final class ViewController: UIViewController {
     }
     
     private func setupView() {
+        view.backgroundColor = .lightGray
         configureHierarchy()
         configureConstraints()
     }
@@ -70,5 +67,13 @@ final class ViewController: UIViewController {
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
         collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+}
+
+extension ViewController: ViewControllerProtocol {
+    func show(models: [Model]) {
+        dataSource = DataSource(collectionView: collectionView, models: models)
+        collectionView.dataSource = dataSource
+        collectionView.prefetchDataSource = dataSource
     }
 }

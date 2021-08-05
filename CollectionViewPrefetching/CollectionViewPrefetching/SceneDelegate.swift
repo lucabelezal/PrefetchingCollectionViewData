@@ -10,12 +10,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let viewController = ViewController(presenter: Presenter())
+        
+        let presenter = Presenter()
+        let viewController = ViewController(presenter: presenter)
+        
         let window = UIWindow(windowScene: windowScene)
         window.backgroundColor = .white
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        
         self.window = window
     }
 

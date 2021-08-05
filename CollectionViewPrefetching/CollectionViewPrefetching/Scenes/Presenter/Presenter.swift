@@ -1,17 +1,17 @@
 import Foundation
 
 protocol PresenterProtocol: AnyObject {
-    func fetchModels() -> [Model]
+    var view: ViewControllerProtocol? { get set }
+    func fetchModels()
 }
 
 final class Presenter: PresenterProtocol {
+    weak var view: ViewControllerProtocol?
     
-    weak var presenter: ViewControllerProtocol?
-    
-    func fetchModels() -> [Model] {
+    func fetchModels(){
         let models = (1...1000).map { _ in
             return Model()
         }
-        return models
+        view?.show(models: models)
     }
 }
