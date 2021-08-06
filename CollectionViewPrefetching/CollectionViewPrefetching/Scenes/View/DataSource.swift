@@ -1,8 +1,8 @@
 import UIKit
 
 protocol DataSourceDelegate: AnyObject {
-    func fetchData(for identifier: UUID, message: String, with cell: Cell)
-    func checkIfHasAlreadyFetchedData(for identifier: UUID, message: String) -> DisplayData?
+    func fetchData(for model: Model, with cell: Cell)
+    func checkIfHasAlreadyFetchedData(for model: Model) -> DisplayData<Model>?
     func fetchAsync(for indexPaths: [IndexPath])
     func cancelFetch(for indexPaths: [IndexPath])
 }
@@ -35,11 +35,11 @@ extension DataSource: UICollectionViewDataSource {
         let identifier = model.identifier
         cell.representedIdentifier = identifier
         
-        if let fetchedData = delegate?.checkIfHasAlreadyFetchedData(for: identifier, message: model.message) {
+        if let fetchedData = delegate?.checkIfHasAlreadyFetchedData(for: model) {
             cell.configure(with: fetchedData)
         } else {
             clearCell(cell: cell)
-            delegate?.fetchData(for: identifier, message: model.message, with: cell)
+            delegate?.fetchData(for: model, with: cell)
         }
         
         return cell

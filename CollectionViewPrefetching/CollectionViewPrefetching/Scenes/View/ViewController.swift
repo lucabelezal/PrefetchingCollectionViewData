@@ -81,12 +81,12 @@ extension ViewController: ViewControllerProtocol {
 }
 
 extension ViewController: DataSourceDelegate {
-    func fetchData(for identifier: UUID, message: String, with cell: Cell) {
-        presenter.fetchData(for: identifier, message: message, with: cell)
+    func fetchData(for model: Model, with cell: Cell) {
+        presenter.fetchData(for: model, with: cell)
     }
     
-    func checkIfHasAlreadyFetchedData(for identifier: UUID, message: String) -> DisplayData? {
-        presenter.checkIfHasAlreadyFetchedData(for: identifier)
+    func checkIfHasAlreadyFetchedData(for model: Model) -> DisplayData<Model>? {
+        presenter.checkIfHasAlreadyFetchedData(for: model.identifier)
     }
     
     func fetchAsync(for indexPaths: [IndexPath]) {

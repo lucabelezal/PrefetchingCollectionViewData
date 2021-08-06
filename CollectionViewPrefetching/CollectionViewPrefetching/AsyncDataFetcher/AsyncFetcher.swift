@@ -3,24 +3,24 @@ import Foundation
 final class AsyncFetcher {
     private let serialAccessQueue = OperationQueue()
     private let fetchQueue = OperationQueue()
-    private var completionHandlers = [UUID: [(DisplayData?) -> Void]]()
-    private var cache = NSCache<NSUUID, DisplayData>()
+    private var completionHandlers = [UUID: [(DisplayData<Model>?) -> Void]]()
+    private var cache = NSCache<NSUUID, DisplayData<Model>>()
 
     init() {
         serialAccessQueue.maxConcurrentOperationCount = 1
     }
 
-    func fetchAsync(_ identifier: UUID, message: String, completion: ((DisplayData?) -> Void)? = nil) {
+    func fetchAsync(for model: Model, completion: ((DisplayData<Model>?) -> Void)? = nil) {
         serialAccessQueue.addOperation {
             if let completion = completion {
-                let handlers = self.completionHandlers[identifier, default: []]
-                self.completionHandlers[identifier] = handlers + [completion]
+                let handlers = self.completionHandlers[model.identifier, default: []]
+                self.completionHandlers[model.identifier] = handlers + [completion]
             }
-            self.fetchData(for: identifier, message: message)
+            self.fetchData(for: model)
         }
     }
 
-    func fetchedData(for identifier: UUID) -> DisplayData? {
+    func fetchedData(for identifier: UUID) -> DisplayData<Model>? {
         return cache.object(forKey: identifier as NSUUID)
     }
 
@@ -35,35 +35,35 @@ final class AsyncFetcher {
         }
     }
 
-    private func fetchData(for identifier: UUID, message: String) {
-        guard operation(for: identifier) == nil else { return }
+    private func fetchData(for model: Model) {
+        guard operation(for: model.identifier) == nil else { return }
         
-        if let data = fetchedData(for: identifier) {
-            invokeCompletionHandlers(for: identifier, with: data)
+        if let data = fetchedData(for: model.identifier) {
+            invokeCompletionHandlers(for: model.identifier, with: data)
             
         } else {
-            let operation = AsyncFetcherOperation(identifier: identifier, message: message)
+            let operation = AsyncFetcherOperation(model: model)
             operation.completionBlock = { [weak operation] in
                 guard let fetchedData = operation?.fetchedData else { return }
-                self.cache.setObject(fetchedData, forKey: identifier as NSUUID)
+                self.cache.setObject(fetchedData, forKey: model.identifier as NSUUID)
                 
                 self.serialAccessQueue.addOperation {
-                    self.invokeCompletionHandlers(for: identifier, with: fetchedData)
+                    self.invokeCompletionHandlers(for: model.identifier, with: fetchedData)
                 }
             }
             fetchQueue.addOperation(operation)
         }
     }
 
-    private func operation(for identifier: UUID) -> AsyncFetcherOperation? {
-        for case let fetchOperation as AsyncFetcherOperation in fetchQueue.operations
-            where !fetchOperation.isCancelled && fetchOperation.identifier == identifier {
+    private func operation(for identifier: UUID) -> AsyncFetcherOperation<Model>? {
+        for case let fetchOperation as AsyncFetcherOperation<Model> in fetchQueue.operations
+        where !fetchOperation.isCancelled && fetchOperation.model.identifier == identifier {
             return fetchOperation
         }
         return nil
     }
 
-    private func invokeCompletionHandlers(for identifier: UUID, with fetchedData: DisplayData) {
+    private func invokeCompletionHandlers(for identifier: UUID, with fetchedData: DisplayData<Model>) {
         let completionHandlers = self.completionHandlers[identifier, default: []]
         self.completionHandlers[identifier] = nil
 

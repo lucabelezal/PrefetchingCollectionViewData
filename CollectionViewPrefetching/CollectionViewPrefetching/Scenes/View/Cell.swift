@@ -1,7 +1,6 @@
 import UIKit
 
 final class Cell: UICollectionViewCell {
-    
     private let titleLabel = UILabel()
     
     static let reuseIdentifier = "Cell"
@@ -26,8 +25,8 @@ final class Cell: UICollectionViewCell {
         layer.borderColor = UIColor.red.cgColor
     }
 
-    func configure(with data: DisplayData?) {
-        backgroundColor = data?.color
-        titleLabel.text = data?.message
+    func configure(with data: DisplayData<Model>?) {
+        backgroundColor = data?.model.color
+        titleLabel.text = data?.model.message
     }
 }

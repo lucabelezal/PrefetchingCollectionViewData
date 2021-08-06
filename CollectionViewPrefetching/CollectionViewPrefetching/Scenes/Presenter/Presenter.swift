@@ -3,8 +3,8 @@ import Foundation
 protocol PresenterProtocol: AnyObject {
     var view: ViewControllerProtocol? { get set }
     func fetchData()
-    func fetchData(for identifier: UUID, message: String, with cell: Cell)
-    func checkIfHasAlreadyFetchedData(for identifier: UUID) -> DisplayData?
+    func fetchData(for model: Model, with cell: Cell)
+    func checkIfHasAlreadyFetchedData(for identifier: UUID) -> DisplayData<Model>?
     func fetchAsync(for indexPaths: [IndexPath])
     func cancelFetch(for indexPaths: [IndexPath])
 }
@@ -27,23 +27,23 @@ final class Presenter: PresenterProtocol {
         view?.show(models: models)
     }
     
-    func fetchData(for identifier: UUID, message: String, with cell: Cell) {
-        asyncFetcher.fetchAsync(identifier, message: message) { fetchedData in
+    func fetchData(for model: Model, with cell: Cell) {
+        asyncFetcher.fetchAsync(for: model) { fetchedData in
             DispatchQueue.main.async {
-                guard cell.representedIdentifier == identifier else { return }
+                guard cell.representedIdentifier == model.identifier else { return }
                 cell.configure(with: fetchedData)
             }
         }
     }
     
-    func checkIfHasAlreadyFetchedData(for identifier: UUID) -> DisplayData? {
+    func checkIfHasAlreadyFetchedData(for identifier: UUID) -> DisplayData<Model>? {
         asyncFetcher.fetchedData(for: identifier)
     }
         
     func fetchAsync(for indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             let model = models[indexPath.row]
-            asyncFetcher.fetchAsync(model.identifier, message: model.message)
+            asyncFetcher.fetchAsync(for: model)
         }
     }
     

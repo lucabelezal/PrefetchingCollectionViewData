@@ -1,11 +1,10 @@
 import UIKit
 
-final class DisplayData: NSObject {
-    var color: UIColor = .red
-    var message: String
-    
-    init(message: String) {
-        self.message = message
-        super.init()
-    }
-}
+//final class DisplayData: NSObject {
+//    var model: Model
+//    
+//    init(model: Model) {
+//        self.model = model
+//        super.init()
+//    }
+//}
