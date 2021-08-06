@@ -1,10 +1,7 @@
-import UIKit
-
-//final class DisplayData: NSObject {
-//    var model: Model
-//    
-//    init(model: Model) {
-//        self.model = model
-//        super.init()
-//    }
-//}
+final class DisplayData<Model: Identifiable> {
+    private(set) var model: Model
+    
+    init(model: Model) {
+        self.model = model
+    }
+}

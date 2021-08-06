@@ -19,6 +19,7 @@
 		6EB573D526BC6A5F00C9853B /* DisplayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB573D426BC6A5F00C9853B /* DisplayData.swift */; };
 		6EB573DB26BC6AF400C9853B /* AsyncFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB573DA26BC6AF400C9853B /* AsyncFetcher.swift */; };
 		6EB573DE26BC6BA300C9853B /* AsyncFetcherOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB573DD26BC6BA300C9853B /* AsyncFetcherOperation.swift */; };
+		6EB573F526BCB7FA00C9853B /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB573F426BCB7FA00C9853B /* Identifiable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		6EB573D426BC6A5F00C9853B /* DisplayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayData.swift; sourceTree = "<group>"; };
 		6EB573DA26BC6AF400C9853B /* AsyncFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFetcher.swift; sourceTree = "<group>"; };
 		6EB573DD26BC6BA300C9853B /* AsyncFetcherOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncFetcherOperation.swift; sourceTree = "<group>"; };
+		6EB573F426BCB7FA00C9853B /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				6EB573D426BC6A5F00C9853B /* DisplayData.swift */,
+				6EB573F426BCB7FA00C9853B /* Identifiable.swift */,
 				6EB573DA26BC6AF400C9853B /* AsyncFetcher.swift */,
 				6EB573DD26BC6BA300C9853B /* AsyncFetcherOperation.swift */,
 			);
@@ -210,6 +213,7 @@
 				6EB573DB26BC6AF400C9853B /* AsyncFetcher.swift in Sources */,
 				6EB573D526BC6A5F00C9853B /* DisplayData.swift in Sources */,
 				6E6411F526BC19CA00CE1DB5 /* AppDelegate.swift in Sources */,
+				6EB573F526BCB7FA00C9853B /* Identifiable.swift in Sources */,
 				6E6411F726BC19CA00CE1DB5 /* SceneDelegate.swift in Sources */,
 				6EB573C426BC682A00C9853B /* DataSource.swift in Sources */,
 			);
