@@ -1,13 +1,13 @@
 import UIKit
 
-protocol ViewControllerProtocol: AnyObject {
+protocol CustomViewControllerProtocol: AnyObject {
     func show(models: [CustomModel])
 }
 
 final class CustomViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-        collectionView.register(Cell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: CustomCollectionViewCell.reuseIdentifier)
         collectionView.layer.borderColor = UIColor.black.cgColor
         collectionView.layer.borderWidth = 2
         collectionView.clipsToBounds = false
@@ -15,10 +15,10 @@ final class CustomViewController: UIViewController {
         return collectionView
     }()
     
-    private var presenter: PresenterProtocol
-    private var dataSource: DataSource<CustomModel>?
+    private var presenter: CustomPresenterProtocol
+    private var dataSource: CollectionViewDataSource<CustomModel>?
     
-    init(presenter: PresenterProtocol) {
+    init(presenter: CustomPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         self.presenter.view = self
@@ -71,29 +71,15 @@ final class CustomViewController: UIViewController {
     }
 }
 
-extension CustomViewController: ViewControllerProtocol {
+extension CustomViewController: CustomViewControllerProtocol {
     func show(models: [CustomModel]) {
-        dataSource = .make(for: models)
-        //dataSource?.delegate = self
+        dataSource = .make(for: models, reuseIdentifier: CustomCollectionViewCell.reuseIdentifier)
+        dataSource?.fetchData = presenter.fetchData
+        dataSource?.checkIfHasAlreadyFetchedData = presenter.checkIfHasAlreadyFetchedData(for:)
+        dataSource?.fetchAsync = presenter.fetchAsync(for:)
+        dataSource?.cancelFetch = presenter.cancelFetch(for:)
+        
         collectionView.dataSource = dataSource
         collectionView.prefetchDataSource = dataSource
     }
 }
-
-//extension ViewController: DataSourceDelegate {
-//    func fetchData(for model: CustomModel, with cell: Cell) {
-//        presenter.fetchData(for: model, with: cell)
-//    }
-//    
-//    func checkIfHasAlreadyFetchedData(for model: CustomModel) -> DisplayData<CustomModel>? {
-//        presenter.checkIfHasAlreadyFetchedData(for: model.identifier)
-//    }
-//    
-//    func fetchAsync(for indexPaths: [IndexPath]) {
-//        presenter.fetchAsync(for: indexPaths)
-//    }
-//    
-//    func cancelFetch(for indexPaths: [IndexPath]) {
-//        presenter.cancelFetch(for: indexPaths)
-//    }
-//}

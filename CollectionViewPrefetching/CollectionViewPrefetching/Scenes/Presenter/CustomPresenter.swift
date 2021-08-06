@@ -1,10 +1,10 @@
-import Foundation
+import UIKit
 
 protocol CustomPresenterProtocol: AnyObject {
     var view: CustomViewControllerProtocol? { get set }
     func fetchData()
-    func fetchData(for model: CustomModel, with cell: CustomCollectionViewCell)
-    func checkIfHasAlreadyFetchedData(for identifier: UUID) -> DisplayData<CustomModel>?
+    func fetchData(for model: CustomModel, with cell: UICollectionViewCell)
+    func checkIfHasAlreadyFetchedData(for identifier: UUID) -> DisplayData<CustomModel>? 
     func fetchAsync(for indexPaths: [IndexPath])
     func cancelFetch(for indexPaths: [IndexPath])
 }
@@ -12,10 +12,10 @@ protocol CustomPresenterProtocol: AnyObject {
 final class CustomPresenter: CustomPresenterProtocol {
     weak var view: CustomViewControllerProtocol?
     
-    private let asyncFetcher: AsyncFetcher<CustomModel>
+    private let asyncFetcher: CustomAsyncFetcher
     private var models: [CustomModel] = []
     
-    init(asyncFetcher: AsyncFetcher<CustomModel> = AsyncFetcher<CustomModel>()) {
+    init(asyncFetcher: CustomAsyncFetcher = CustomAsyncFetcher()) {
         self.asyncFetcher = asyncFetcher
     }
     
@@ -27,30 +27,25 @@ final class CustomPresenter: CustomPresenterProtocol {
         view?.show(models: models)
     }
     
-    func fetchData(for model: CustomModel, with cell: CustomCollectionViewCell) {
-        asyncFetcher.fetchAsync(for: model) { fetchedData in
-            DispatchQueue.main.async {
-                guard cell.representedIdentifier == model.identifier else { return }
-                cell.configure(with: fetchedData)
-            }
-        }
+    func fetchData(for model: CustomModel, with cell: UICollectionViewCell) {
+        asyncFetcher.fetchData(for: model, with: cell)
     }
-    
+
     func checkIfHasAlreadyFetchedData(for identifier: UUID) -> DisplayData<CustomModel>? {
-        asyncFetcher.fetchedData(for: identifier)
+        asyncFetcher.checkIfHasAlreadyFetchedData(for: identifier)
     }
-        
+
     func fetchAsync(for indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             let model = models[indexPath.row]
             asyncFetcher.fetchAsync(for: model)
         }
     }
-    
+
     func cancelFetch(for indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             let model = models[indexPath.row]
-            asyncFetcher.cancelFetch(model.identifier)
+            asyncFetcher.cancelFetch(for: model.identifier)
         }
     }
 }

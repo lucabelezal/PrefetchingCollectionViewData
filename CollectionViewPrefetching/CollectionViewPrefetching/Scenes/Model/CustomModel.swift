@@ -1,6 +1,6 @@
 import UIKit
 
-final class Model: NSObject, Identifiable {
+final class CustomModel: NSObject, Identifiable {
     var identifier = UUID()
     private(set) var color: UIColor
     private(set) var message: String

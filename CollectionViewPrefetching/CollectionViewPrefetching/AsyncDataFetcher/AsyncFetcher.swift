@@ -24,7 +24,7 @@ final class AsyncFetcher<Model: Identifiable> {
         return cache.object(forKey: identifier as NSUUID)
     }
 
-    func cancelFetch(_ identifier: UUID) {
+    func cancelFetch(for identifier: UUID) {
         serialAccessQueue.addOperation {
             self.fetchQueue.isSuspended = true
             defer {

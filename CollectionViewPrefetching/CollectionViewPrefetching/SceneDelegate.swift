@@ -11,8 +11,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let presenter = Presenter()
-        let viewController = ViewController(presenter: presenter)
+        let presenter = CustomPresenter()
+        let viewController = CustomViewController(presenter: presenter)
         
         let window = UIWindow(windowScene: windowScene)
         window.backgroundColor = .white
