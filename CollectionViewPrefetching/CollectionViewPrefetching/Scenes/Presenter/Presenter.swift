@@ -12,10 +12,10 @@ protocol PresenterProtocol: AnyObject {
 final class Presenter: PresenterProtocol {
     weak var view: ViewControllerProtocol?
     
-    private let asyncFetcher: AsyncFetcher
+    private let asyncFetcher: AsyncFetcher<Model>
     private var models: [Model] = []
     
-    init(asyncFetcher: AsyncFetcher = AsyncFetcher()) {
+    init(asyncFetcher: AsyncFetcher<Model> = AsyncFetcher<Model>()) {
         self.asyncFetcher = asyncFetcher
     }
     

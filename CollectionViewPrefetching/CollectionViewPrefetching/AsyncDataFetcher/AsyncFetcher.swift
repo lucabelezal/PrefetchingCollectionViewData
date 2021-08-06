@@ -1,6 +1,6 @@
 import Foundation
 
-final class AsyncFetcher {
+final class AsyncFetcher<Model: Identifiable> {
     private let serialAccessQueue = OperationQueue()
     private let fetchQueue = OperationQueue()
     private var completionHandlers = [UUID: [(DisplayData<Model>?) -> Void]]()
