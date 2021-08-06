@@ -1,6 +1,13 @@
 import UIKit
 
-final class CollectionViewDataSource<Model: Identifiable>: NSObject, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+protocol CollectionViewDataSourceProtocol: AnyObject {
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+}
+
+final class CollectionViewDataSource<Model: Identifiable>: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+    
+    weak var scrollDelegate: CollectionViewDataSourceProtocol?
+    
     typealias CellConfigurator = ((UUID, DisplayData<Model>?, UICollectionViewCell) -> Void)?
     
     var fetchData: ((Model, UICollectionViewCell) -> Void)?
@@ -20,6 +27,12 @@ final class CollectionViewDataSource<Model: Identifiable>: NSObject, UICollectio
         self.models = models
         self.reuseIdentifier = reuseIdentifier
         self.cellConfigurator = cellConfigurator
+    }
+    
+    // MARK: - UICollectionViewDelegate -
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollDelegate?.scrollViewDidScroll(scrollView)
     }
     
     // MARK: - UICollectionViewDataSource -

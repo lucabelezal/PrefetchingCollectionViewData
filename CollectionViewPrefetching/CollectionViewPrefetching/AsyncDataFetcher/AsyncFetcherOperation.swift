@@ -9,8 +9,8 @@ final class AsyncFetcherOperation<Model: Identifiable>: Operation {
     }
 
     override func main() {
-        // Wait for a second to mimic a slow operation.
-        Thread.sleep(until: Date().addingTimeInterval(1))
+        // Wait half a second to mimic a slow operation.
+        Thread.sleep(until: Date().addingTimeInterval(0.5))
         guard !isCancelled else { return }
         fetchedData = DisplayData(model: model)
     }

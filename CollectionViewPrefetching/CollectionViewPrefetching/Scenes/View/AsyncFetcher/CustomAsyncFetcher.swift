@@ -14,8 +14,10 @@ final class CustomAsyncFetcher: AsyncFetcherType {
     func fetchData(for model: CustomModel, with cell: UICollectionViewCell) {
         asyncFetcher.fetchAsync(for: model) { fetchedData in
             DispatchQueue.main.async {
-                guard let cell = cell as? CustomCollectionViewCell,
-                      cell.representedIdentifier == model.identifier else { return }
+                guard
+                    let cell = cell as? CustomCollectionViewCell,
+                    cell.representedIdentifier == model.identifier else { return }
+                
                 cell.configure(with: fetchedData)
             }
         }

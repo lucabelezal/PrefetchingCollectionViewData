@@ -14,17 +14,29 @@ final class CustomPresenter: CustomPresenterProtocol {
     
     private let asyncFetcher: CustomAsyncFetcher
     private var models: [CustomModel] = []
+    private var currentPage = 0
+    private var isLoading = false
     
     init(asyncFetcher: CustomAsyncFetcher = CustomAsyncFetcher()) {
         self.asyncFetcher = asyncFetcher
     }
-    
+        
     func fetchData(){
-        let models = (1...1000).map { number in
+        guard !isLoading else { return }
+        
+        isLoading = true
+        currentPage += increment()
+        
+        // Wait half a second to simulate a slow Internet connection.
+        Thread.sleep(until: Date().addingTimeInterval(0.5))
+        let newModels = (1...currentPage).map { number in
             return CustomModel(message: "\(number)")
         }
-        self.models.append(contentsOf: models)
-        view?.show(models: models)
+
+        models.append(contentsOf: newModels)
+        view?.show(models: newModels)
+        
+        isLoading = false
     }
     
     func fetchData(for model: CustomModel, with cell: UICollectionViewCell) {
@@ -47,5 +59,9 @@ final class CustomPresenter: CustomPresenterProtocol {
             let model = models[indexPath.row]
             asyncFetcher.cancelFetch(for: model.identifier)
         }
+    }
+        
+    private func increment() -> Int {
+        20
     }
 }

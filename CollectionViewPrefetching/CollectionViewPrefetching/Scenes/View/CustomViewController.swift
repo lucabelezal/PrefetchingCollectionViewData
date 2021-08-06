@@ -74,12 +74,22 @@ final class CustomViewController: UIViewController {
 extension CustomViewController: CustomViewControllerProtocol {
     func show(models: [CustomModel]) {
         dataSource = .make(for: models, reuseIdentifier: CustomCollectionViewCell.reuseIdentifier)
+        dataSource?.scrollDelegate = self
         dataSource?.fetchData = presenter.fetchData
         dataSource?.checkIfHasAlreadyFetchedData = presenter.checkIfHasAlreadyFetchedData(for:)
         dataSource?.fetchAsync = presenter.fetchAsync(for:)
         dataSource?.cancelFetch = presenter.cancelFetch(for:)
         
+        collectionView.delegate = dataSource
         collectionView.dataSource = dataSource
         collectionView.prefetchDataSource = dataSource
+    }
+}
+
+extension CustomViewController: CollectionViewDataSourceProtocol {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.hasReachedVerticalLimit() {
+            presenter.fetchData()
+        }
     }
 }
