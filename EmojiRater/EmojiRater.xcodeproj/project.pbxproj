@@ -7,20 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E925AED26D192A400AA5F33 /* EmojiRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E925AEC26D192A400AA5F33 /* EmojiRating.swift */; };
+		6E925AF126D192CA00AA5F33 /* EmojiViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E925AF026D192CA00AA5F33 /* EmojiViewCell.swift */; };
+		6E925AF326D192E200AA5F33 /* RatingOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E925AF226D192E200AA5F33 /* RatingOverlayView.swift */; };
+		6E925AF526D192F600AA5F33 /* EmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E925AF426D192F600AA5F33 /* EmojiViewController.swift */; };
+		6E925AFC26D1957000AA5F33 /* DataLoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E925AFB26D1957000AA5F33 /* DataLoadOperation.swift */; };
+		6E925AFE26D1959700AA5F33 /* EmojiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E925AFD26D1959700AA5F33 /* EmojiService.swift */; };
+		6E925B0026D1961B00AA5F33 /* EmojiPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E925AFF26D1961B00AA5F33 /* EmojiPresenter.swift */; };
+		6E925B0526D1B28300AA5F33 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E925B0426D1B28300AA5F33 /* CodeView.swift */; };
 		6E9CAF5226BDC3E700A137BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9CAF5126BDC3E700A137BA /* AppDelegate.swift */; };
 		6E9CAF5426BDC3E700A137BA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9CAF5326BDC3E700A137BA /* SceneDelegate.swift */; };
-		6E9CAF5626BDC3E700A137BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9CAF5526BDC3E700A137BA /* ViewController.swift */; };
-		6E9CAF5926BDC3E700A137BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9CAF5726BDC3E700A137BA /* Main.storyboard */; };
 		6E9CAF5B26BDC3EA00A137BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E9CAF5A26BDC3EA00A137BA /* Assets.xcassets */; };
 		6E9CAF5E26BDC3EA00A137BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9CAF5C26BDC3EA00A137BA /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E925AEC26D192A400AA5F33 /* EmojiRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiRating.swift; sourceTree = "<group>"; };
+		6E925AF026D192CA00AA5F33 /* EmojiViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewCell.swift; sourceTree = "<group>"; };
+		6E925AF226D192E200AA5F33 /* RatingOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingOverlayView.swift; sourceTree = "<group>"; };
+		6E925AF426D192F600AA5F33 /* EmojiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewController.swift; sourceTree = "<group>"; };
+		6E925AFB26D1957000AA5F33 /* DataLoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadOperation.swift; sourceTree = "<group>"; };
+		6E925AFD26D1959700AA5F33 /* EmojiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiService.swift; sourceTree = "<group>"; };
+		6E925AFF26D1961B00AA5F33 /* EmojiPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPresenter.swift; sourceTree = "<group>"; };
+		6E925B0426D1B28300AA5F33 /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
 		6E9CAF4E26BDC3E700A137BA /* EmojiRater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiRater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E9CAF5126BDC3E700A137BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E9CAF5326BDC3E700A137BA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6E9CAF5526BDC3E700A137BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6E9CAF5826BDC3E700A137BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6E9CAF5A26BDC3EA00A137BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E9CAF5D26BDC3EA00A137BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E9CAF5F26BDC3EA00A137BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,6 +49,94 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E925AEA26D1925100AA5F33 /* ResourceFiles */ = {
+			isa = PBXGroup;
+			children = (
+				6E9CAF5A26BDC3EA00A137BA /* Assets.xcassets */,
+				6E9CAF5C26BDC3EA00A137BA /* LaunchScreen.storyboard */,
+				6E9CAF5F26BDC3EA00A137BA /* Info.plist */,
+			);
+			path = ResourceFiles;
+			sourceTree = "<group>";
+		};
+		6E925AEB26D1928000AA5F33 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				6E925AF626D1933B00AA5F33 /* EmojiList */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		6E925AF626D1933B00AA5F33 /* EmojiList */ = {
+			isa = PBXGroup;
+			children = (
+				6E925AFA26D1935D00AA5F33 /* Network */,
+				6E925AF726D1934700AA5F33 /* Model */,
+				6E925AF926D1935200AA5F33 /* Presenter */,
+				6E925AF826D1934D00AA5F33 /* View */,
+			);
+			path = EmojiList;
+			sourceTree = "<group>";
+		};
+		6E925AF726D1934700AA5F33 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6E925AEC26D192A400AA5F33 /* EmojiRating.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6E925AF826D1934D00AA5F33 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6E925B0226D1977900AA5F33 /* Cell */,
+				6E925B0126D1977500AA5F33 /* RatingOverlay */,
+				6E925AF426D192F600AA5F33 /* EmojiViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6E925AF926D1935200AA5F33 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6E925AFB26D1957000AA5F33 /* DataLoadOperation.swift */,
+				6E925AFF26D1961B00AA5F33 /* EmojiPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6E925AFA26D1935D00AA5F33 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6E925AFD26D1959700AA5F33 /* EmojiService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		6E925B0126D1977500AA5F33 /* RatingOverlay */ = {
+			isa = PBXGroup;
+			children = (
+				6E925AF226D192E200AA5F33 /* RatingOverlayView.swift */,
+			);
+			path = RatingOverlay;
+			sourceTree = "<group>";
+		};
+		6E925B0226D1977900AA5F33 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6E925AF026D192CA00AA5F33 /* EmojiViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		6E925B0326D1B27A00AA5F33 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				6E925B0426D1B28300AA5F33 /* CodeView.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		6E9CAF4526BDC3E700A137BA = {
 			isa = PBXGroup;
 			children = (
@@ -58,11 +158,9 @@
 			children = (
 				6E9CAF5126BDC3E700A137BA /* AppDelegate.swift */,
 				6E9CAF5326BDC3E700A137BA /* SceneDelegate.swift */,
-				6E9CAF5526BDC3E700A137BA /* ViewController.swift */,
-				6E9CAF5726BDC3E700A137BA /* Main.storyboard */,
-				6E9CAF5A26BDC3EA00A137BA /* Assets.xcassets */,
-				6E9CAF5C26BDC3EA00A137BA /* LaunchScreen.storyboard */,
-				6E9CAF5F26BDC3EA00A137BA /* Info.plist */,
+				6E925B0326D1B27A00AA5F33 /* Helper */,
+				6E925AEB26D1928000AA5F33 /* Scenes */,
+				6E925AEA26D1925100AA5F33 /* ResourceFiles */,
 			);
 			path = EmojiRater;
 			sourceTree = "<group>";
@@ -126,7 +224,6 @@
 			files = (
 				6E9CAF5E26BDC3EA00A137BA /* LaunchScreen.storyboard in Resources */,
 				6E9CAF5B26BDC3EA00A137BA /* Assets.xcassets in Resources */,
-				6E9CAF5926BDC3E700A137BA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,23 +234,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E9CAF5626BDC3E700A137BA /* ViewController.swift in Sources */,
+				6E925AF326D192E200AA5F33 /* RatingOverlayView.swift in Sources */,
+				6E925AF126D192CA00AA5F33 /* EmojiViewCell.swift in Sources */,
 				6E9CAF5226BDC3E700A137BA /* AppDelegate.swift in Sources */,
+				6E925AFE26D1959700AA5F33 /* EmojiService.swift in Sources */,
 				6E9CAF5426BDC3E700A137BA /* SceneDelegate.swift in Sources */,
+				6E925B0526D1B28300AA5F33 /* CodeView.swift in Sources */,
+				6E925AFC26D1957000AA5F33 /* DataLoadOperation.swift in Sources */,
+				6E925AF526D192F600AA5F33 /* EmojiViewController.swift in Sources */,
+				6E925AED26D192A400AA5F33 /* EmojiRating.swift in Sources */,
+				6E925B0026D1961B00AA5F33 /* EmojiPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6E9CAF5726BDC3E700A137BA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6E9CAF5826BDC3E700A137BA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6E9CAF5C26BDC3EA00A137BA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -287,7 +383,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = EmojiRater/Info.plist;
+				INFOPLIST_FILE = EmojiRater/ResourceFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,7 +401,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = EmojiRater/Info.plist;
+				INFOPLIST_FILE = EmojiRater/ResourceFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
