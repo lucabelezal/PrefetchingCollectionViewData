@@ -2,7 +2,7 @@ import UIKit
 
 final class CustomCollectionViewCell: UICollectionViewCell {
     private let titleLabel = UILabel()
-    
+
     static let reuseIdentifier = "CustomCollectionViewCell"
     var representedIdentifier: UUID?
 
@@ -13,12 +13,12 @@ final class CustomCollectionViewCell: UICollectionViewCell {
         titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
     }
-    
+
     @available(*, unavailable)
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         layer.borderWidth = 1.0

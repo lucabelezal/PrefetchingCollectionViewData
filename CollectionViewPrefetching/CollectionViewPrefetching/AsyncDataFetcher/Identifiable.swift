@@ -1,5 +1,5 @@
 import Foundation
 
 protocol Identifiable: NSObject {
-     var identifier: UUID { get }
+    var identifier: UUID { get }
 }

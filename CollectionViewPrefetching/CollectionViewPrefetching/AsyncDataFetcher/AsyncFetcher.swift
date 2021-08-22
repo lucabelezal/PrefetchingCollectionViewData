@@ -37,16 +37,16 @@ final class AsyncFetcher<Model: Identifiable> {
 
     private func fetchData(for model: Model) {
         guard operation(for: model.identifier) == nil else { return }
-        
+
         if let data = fetchedData(for: model.identifier) {
             invokeCompletionHandlers(for: model.identifier, with: data)
-            
+
         } else {
             let operation = AsyncFetcherOperation(model: model)
             operation.completionBlock = { [weak operation] in
                 guard let fetchedData = operation?.fetchedData else { return }
                 self.cache.setObject(fetchedData, forKey: model.identifier as NSUUID)
-                
+
                 self.serialAccessQueue.addOperation {
                     self.invokeCompletionHandlers(for: model.identifier, with: fetchedData)
                 }
@@ -57,7 +57,8 @@ final class AsyncFetcher<Model: Identifiable> {
 
     private func operation(for identifier: UUID) -> AsyncFetcherOperation<Model>? {
         for case let fetchOperation as AsyncFetcherOperation<Model> in fetchQueue.operations
-        where !fetchOperation.isCancelled && fetchOperation.model.identifier == identifier {
+            where !fetchOperation.isCancelled && fetchOperation.model.identifier == identifier
+        {
             return fetchOperation
         }
         return nil

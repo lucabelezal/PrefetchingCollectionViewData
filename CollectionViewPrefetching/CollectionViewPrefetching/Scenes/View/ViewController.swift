@@ -14,27 +14,27 @@ final class CustomViewController: UIViewController {
         collectionView.backgroundColor = .white
         return collectionView
     }()
-    
+
     private var presenter: PresenterProtocol
     private var dataSource: DataSource<CustomModel>?
-    
+
     init(presenter: PresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         self.presenter.view = self
         setupView()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.fetchData()
     }
-    
+
     @available(*, unavailable)
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-        
+
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -51,17 +51,17 @@ final class CustomViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
-    
+
     private func setupView() {
         view.backgroundColor = .lightGray
         configureHierarchy()
         configureConstraints()
     }
-    
+
     private func configureHierarchy() {
         view.addSubview(collectionView)
     }
-    
+
     private func configureConstraints() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
@@ -74,26 +74,26 @@ final class CustomViewController: UIViewController {
 extension CustomViewController: ViewControllerProtocol {
     func show(models: [CustomModel]) {
         dataSource = .make(for: models)
-        //dataSource?.delegate = self
+        // dataSource?.delegate = self
         collectionView.dataSource = dataSource
         collectionView.prefetchDataSource = dataSource
     }
 }
 
-//extension ViewController: DataSourceDelegate {
+// extension ViewController: DataSourceDelegate {
 //    func fetchData(for model: CustomModel, with cell: Cell) {
 //        presenter.fetchData(for: model, with: cell)
 //    }
-//    
+//
 //    func checkIfHasAlreadyFetchedData(for model: CustomModel) -> DisplayData<CustomModel>? {
 //        presenter.checkIfHasAlreadyFetchedData(for: model.identifier)
 //    }
-//    
+//
 //    func fetchAsync(for indexPaths: [IndexPath]) {
 //        presenter.fetchAsync(for: indexPaths)
 //    }
-//    
+//
 //    func cancelFetch(for indexPaths: [IndexPath]) {
 //        presenter.cancelFetch(for: indexPaths)
 //    }
-//}
+// }

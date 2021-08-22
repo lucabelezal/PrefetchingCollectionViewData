@@ -14,27 +14,27 @@ final class CustomViewController: UIViewController {
         collectionView.backgroundColor = .white
         return collectionView
     }()
-    
+
     private var presenter: CustomPresenterProtocol
     private var dataSource: CollectionViewDataSource<CustomModel>?
-    
+
     init(presenter: CustomPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         self.presenter.view = self
         setupView()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.fetchData()
     }
-    
+
     @available(*, unavailable)
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-        
+
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -51,17 +51,17 @@ final class CustomViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
-    
+
     private func setupView() {
         view.backgroundColor = .lightGray
         configureHierarchy()
         configureConstraints()
     }
-    
+
     private func configureHierarchy() {
         view.addSubview(collectionView)
     }
-    
+
     private func configureConstraints() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
@@ -79,7 +79,7 @@ extension CustomViewController: CustomViewControllerProtocol {
         dataSource?.checkIfHasAlreadyFetchedData = presenter.checkIfHasAlreadyFetchedData(for:)
         dataSource?.fetchAsync = presenter.fetchAsync(for:)
         dataSource?.cancelFetch = presenter.cancelFetch(for:)
-        
+
         collectionView.delegate = dataSource
         collectionView.dataSource = dataSource
         collectionView.prefetchDataSource = dataSource

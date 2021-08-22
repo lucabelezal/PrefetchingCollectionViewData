@@ -5,8 +5,8 @@ extension CollectionViewDataSource where Model == CustomModel {
         return CollectionViewDataSource(
             models: models,
             reuseIdentifier: reuseIdentifier
-        ) { (identifier, displayData, cell) in
-            
+        ) { identifier, displayData, cell in
+
             guard let cell = cell as? CustomCollectionViewCell else { return }
             cell.representedIdentifier = identifier
             cell.configure(with: displayData)
